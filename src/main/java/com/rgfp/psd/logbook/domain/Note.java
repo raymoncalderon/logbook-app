@@ -54,6 +54,12 @@ public class Note {
 
     public String getSummary() {
         // not implemented
-        return "";
+        String content;
+        content = getContent();
+
+        if (content.length() > 15) {
+            content = content.substring(0, 15);
+        }
+        return content;
     }
 }
