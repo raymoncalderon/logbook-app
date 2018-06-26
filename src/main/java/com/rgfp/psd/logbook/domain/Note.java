@@ -62,4 +62,26 @@ public class Note {
         }
         return content;
     }
+
+    public Note clone(){
+        Note noteClonada=new Note();
+        noteClonada.setTitle(this.getTitle());
+        noteClonada.setContent(this.getContent());
+
+        LocalDateTime fechaClonada=LocalDateTime.now();
+
+        if (this.getTimestamp() == null) {
+            noteClonada.setTimestamp(fechaClonada);
+
+        } else{
+
+            if (this.getTimestamp().isAfter(fechaClonada)){
+                noteClonada.setTimestamp(this.getTimestamp().plusDays(1));
+            } else{
+                noteClonada.setTimestamp(fechaClonada);
+            }
+        }
+
+        return  noteClonada;
+    }
 }

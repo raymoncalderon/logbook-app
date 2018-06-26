@@ -3,6 +3,9 @@ package com.rgfp.psd.logbook.domain;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import static org.junit.Assert.*;
 
 public class NoteTest {
@@ -51,5 +54,46 @@ public class NoteTest {
         assertTrue(largoPalabra<15);
         assertEquals(contenido2, content);
     }
+
+    @Test
+    public void devuelveObjetoNoteConNombreyContenido(){
+      Note note = new Note();
+      note.setTitle("Title Test1");
+      note.setContent("Content Test1");
+
+      Note noteClone=note.clone();
+
+      assertEquals(note.getTitle(), noteClone.getTitle());
+      assertEquals(note.getContent(), noteClone.getContent());
+    }
+
+    @Test
+    public void devuelveObjetoNoteFechaMayor(){
+        Note note = new Note();
+        note.setTimestamp(LocalDateTime.now().minusDays(1));
+
+        Note noteClone=note.clone();
+
+        assertTrue(noteClone.getTimestamp().isAfter(note.getTimestamp()));
+    }
+
+    @Test
+    public void devuelveObjetoNoteFechaMenor(){
+        Note note = new Note();
+        note.setTimestamp(LocalDateTime.now().plusDays(1));
+
+        Note noteClone=note.clone();
+
+        assertTrue(noteClone.getTimestamp().isAfter(note.getTimestamp()));
+
+    }
+
+    @Test
+    public void devuelveObjetoNotenoNulo(){
+        Note note = new Note();
+
+        assertNotNull(note.clone());
+    }
+
 
 }
